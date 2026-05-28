@@ -5,18 +5,33 @@ import { useEffect, useState } from "react";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [minRating, setMinRating] = useState(0);
   const fetchMovies = async () => {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=6c58b241ce3200bb8569c54fe2d69cac",
     );
     const data = await response.json();
     setMovies(data.results);
+    setFilteredMovies(data.results);
   };
 
   useEffect(() => {
     fetchMovies();
   }, []);
-  console.log(movies);
+  // console.log(movies);
+
+  const handleFilter = (rate) => {
+    if (rate === minRating) {
+      setMinRating(0);
+      setFilteredMovies(movies);
+    } else {
+      setMinRating(rate);
+      const filtered = movies.filter((movie) => movie.vote_average >= rate);
+      setFilteredMovies(filtered);
+    }
+  };
+  console.log(filteredMovies);
 
   return (
     <section className="movie_list">
@@ -26,9 +41,18 @@ const MovieList = () => {
         </h2>
         <div className="align_center movie_list_fs">
           <ul className="align_center movie_filter">
-            <li className="movie_filter_item active">8+ Star</li>
-            <li className="movie_filter_item">7+ Star</li>
-            <li className="movie_filter_item">6+ Star</li>
+            <li
+              className="movie_filter_item active"
+              onClick={() => handleFilter(8)}
+            >
+              8+ Star
+            </li>
+            <li className="movie_filter_item" onClick={() => handleFilter(7)}>
+              7+ Star
+            </li>
+            <li className="movie_filter_item" onClick={() => handleFilter(6)}>
+              6+ Star
+            </li>
           </ul>
           <select name="" id="" className="movie_sorting">
             <option value="">Sort By</option>
@@ -42,7 +66,7 @@ const MovieList = () => {
         </div>
       </header>
       <div className="movie_cards">
-        {movies.map((movie) => (
+        {filteredMovies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
