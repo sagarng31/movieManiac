@@ -2,6 +2,7 @@ import "./MovieList.css";
 import Fire from "../../assets/fire.png";
 import MovieCard from "./MovieCard";
 import { useEffect, useState } from "react";
+import FilterGroup from "./FilterGroup";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -40,20 +41,11 @@ const MovieList = () => {
           Popular <img src={Fire} className="navbar_emoji" />
         </h2>
         <div className="align_center movie_list_fs">
-          <ul className="align_center movie_filter">
-            <li
-              className="movie_filter_item active"
-              onClick={() => handleFilter(8)}
-            >
-              8+ Star
-            </li>
-            <li className="movie_filter_item" onClick={() => handleFilter(7)}>
-              7+ Star
-            </li>
-            <li className="movie_filter_item" onClick={() => handleFilter(6)}>
-              6+ Star
-            </li>
-          </ul>
+          <FilterGroup
+            minRating={minRating}
+            onRateClick={handleFilter}
+            ratingRange={[8, 7, 6]}
+          />
           <select name="" id="" className="movie_sorting">
             <option value="">Sort By</option>
             <option value="">Date</option>
