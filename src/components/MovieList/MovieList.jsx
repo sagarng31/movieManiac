@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
+import _ from "lodash";
+
 import "./MovieList.css";
 import Fire from "../../assets/fire.png";
 import MovieCard from "./MovieCard";
-import { useEffect, useState } from "react";
 import FilterGroup from "./FilterGroup";
 
 const MovieList = () => {
@@ -43,6 +45,12 @@ const MovieList = () => {
     setSort((prev) => ({ ...prev, [name]: value }));
   };
 
+  useEffect(() => {
+    if (sort.by !== "default") {
+      const sortedMovies = _.orderBy(filteredMovies, [sort.by], [sort.order]);
+      setFilteredMovies(sortedMovies);
+    }
+  }, [sort]);
   return (
     <section className="movie_list">
       <header className="align_center movie_list_header">
