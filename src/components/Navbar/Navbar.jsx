@@ -10,13 +10,13 @@ const Navbar = () => {
       <h1>MovieManiac</h1>
       <div className="navbar_links">
         <DarkMode />
-        <a href="">
+        <a href="#popular">
           Popular <img src={Fire} className="navbar_emoji" />
         </a>
-        <a href="">
+        <a href="#top_rated">
           Top Rated <img src={Star} className="navbar_emoji" />
         </a>
-        <a href="">
+        <a href="#upcoming">
           Upcoming <img src={Party} className="navbar_emoji" />
         </a>
       </div>
