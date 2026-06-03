@@ -24,7 +24,7 @@ const MovieList = ({ type, title, emoji }) => {
 
   useEffect(() => {
     fetchMovies();
-  }, []);
+  }, [type]);
   // console.log(movies);
 
   const handleFilter = (rate) => {
@@ -51,7 +51,7 @@ const MovieList = ({ type, title, emoji }) => {
     }
   }, [sort]);
   return (
-    <section className="movie_list" id={type}>
+    <section className="movie_list">
       <header className="align_center movie_list_header">
         <h2 className="align_center movie_list_heading">
           {title} <img src={emoji} className="navbar_emoji" />

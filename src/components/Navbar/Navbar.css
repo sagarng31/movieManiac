@@ -25,6 +25,9 @@
   text-decoration: none;
   padding: 0 15px;
 }
+.navbar_links > a.active {
+  font-weight: 700;
+}
 
 .navbar_emoji {
   width: 25px;
