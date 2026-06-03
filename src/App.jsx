@@ -9,6 +9,7 @@ import MovieList from "./components/MovieList/MovieList";
 import Fire from "./assets/fire.png";
 import Star from "./assets/glowing-star.png";
 import Party from "./assets/partying-face.png";
+import SingleMovie from "./components/Pages/SingleMovie";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           path="/upcoming"
           element={<MovieList type="upcoming" title="Upcoming" emoji={Party} />}
         />
+        <Route path="/movies/:movieId" element={<SingleMovie />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
